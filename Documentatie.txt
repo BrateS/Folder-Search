@@ -1,0 +1,39 @@
+README FolderSearch
+
+Utilizare:
+ .\FolderSearch <PathToSearch> <extension|extension;extension;..|*> <textToSearch> <outputFile>
+Atentie:
+ Programul este facut pentru path-uri scrise cu '/', sunt mai convenbile.
+Exemplu:
+ .\FolderSearch.exe 'C:/' "*" a "mama.txt"
+Documentatie:
+	Implementarea consta in ultilizarea un queue in care se pun directoare pentru
+		a fi luate la rand si a fi procesate ulterior. 
+		Initial se iau argumentele si se parseaza string-ul de la extensii.
+		Dupa se apeleaza SearchDirectory-ul.
+	In SearchDirectory se ia directorul curent si se adauga in queue, 
+		dupa directoarele din acesta sunt puse in queue si tot asa ..
+		astfel sunt procesate toate directoarele.
+	Pentru fiecare director se iau fisierele din acesta, se verifica 
+		daca extensia este cea dorita si se cauta linie cu linie folosind
+		functia checkForStringInFile.
+	Aceasta deschide fisier-ul, citeste linie cu linie si se verifica daca
+		exista match cu string-ul dat ca argument.
+
+	Experiente/Probleme intampinate:
+		- implementarea multithreading-ului
+		- obisnuirea cu folosirea sistemului de managed pointers
+		- compilarea programului in shell si testarea
+		- modul de a comenta parti din cod in Visual Studio..
+		- fericirea cand vezi ca merge ce a scris.
+
+	Pentru neclaritati nu ezitati sa ma intrebati.
+	Tema a fost interesanta si educativa.
+	Have fun with it.
+
+LATER EDIT:
+		Am facut si multithreading. Am facut o coada care se blocheaza cand este folosita cu mutex si condition variable.
+		Am observat ca este cel mai eficient sa folosesc 3 thread-uri dupa cateva teste fiindca era o reducere in timp
+		cam de 1/2 fata de single thread. Pentru scriere am folosit tot un mutex.
+		Nu sunt extrem de familiar cu multithreading-ul, dar este foarte fain ca am scazut atata timpul.
+		Sper sa fie stabil. Evident, am scos managed pointers and all that.		
